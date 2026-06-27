@@ -1,0 +1,672 @@
+
+:root {
+  --bg: #08111f;
+  --bg-deep: #0f1e36;
+  --panel: rgba(13, 22, 38, 0.72);
+  --white: #ffffff;
+  --muted: #a9b4c7;
+  --line: rgba(255, 255, 255, 0.12);
+  --orange: #ff4c29;
+  --blue-glow: #4aa3ff;
+  --shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--white);
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 20% 12%, rgba(74, 163, 255, 0.08) 0%, rgba(74, 163, 255, 0) 28%),
+    radial-gradient(circle at 78% 18%, rgba(255, 76, 41, 0.08) 0%, rgba(255, 76, 41, 0) 30%),
+    linear-gradient(180deg, var(--bg) 0%, #091221 55%, #060d17 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.24;
+  z-index: 0;
+
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+  background-size: 72px 72px;
+
+  mask-image: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.9),
+    rgba(0,0,0,0.35) 65%,
+    rgba(0,0,0,0)
+  );
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: min(90%, 1280px);
+
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 1rem 1.3rem;
+
+  border-radius: 999px;
+
+  background: rgba(8, 17, 31, 0.7);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 8px 30px rgba(0,0,0,0.16);
+}
+
+.site-logo {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.site-nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 700;
+  position: relative;
+  transition: .3s ease;
+}
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: var(--orange);
+  transition: width .4s ease;
+}
+
+.site-nav a:hover::after {
+  width: 100%;
+}
+
+.site-nav a:hover {
+  color: var(--orange);
+}
+
+/* =========================
+   SCROLL
+========================= */
+
+.snap-shell {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.section-page {
+  position: relative;
+  min-height: 100vh;
+
+  padding: clamp(1.5rem, 8vw, 6rem);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  scroll-snap-align: start;
+
+  overflow: hidden;
+
+  z-index: 1;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  background:
+    radial-gradient(circle at top left, rgba(255,76,41,0.15), transparent 25%),
+    radial-gradient(circle at bottom right, rgba(74,163,255,0.12), transparent 35%),
+    linear-gradient(120deg, #08111f, #0f1e36);
+}
+
+.subhead {
+  color: rgba(255,255,255,0.75);
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.hero-copy {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.hero-accent-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 4px;
+  height: 0;
+
+  background: var(--orange);
+
+  /* color: white; */
+
+  border-radius: 999px;
+
+  box-shadow:
+    0 0 30px rgba(255,76,41,0.7);
+}
+
+.hero h1 {
+  margin: 0;
+
+  font-family: "Space Grotesk", sans-serif;
+
+  font-size: clamp(3rem, 8vw, 7rem);
+
+  line-height: 0.92;
+
+  letter-spacing: -0.06em;
+
+  font-weight: 700;
+
+  max-width: 10ch;
+
+  text-transform: uppercase;
+
+  color: white;
+
+  opacity: 0;
+
+  text-shadow:
+    0 0 20px rgba(255,255,255,0.08),
+    0 0 40px rgba(255,76,41,0.15);
+
+    font-size: 3rem;
+}
+
+/* =========================
+   SCROLL INDICATOR
+========================= */
+
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 2rem;
+  transform: translateX(-50%);
+}
+
+.scroll-hint span {
+  display: block;
+
+  width: 20px;
+  height: 20px;
+
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+
+  transform: rotate(45deg);
+
+  animation: bounce 1.8s infinite;
+}
+
+@keyframes bounce {
+  0%,100% {
+    transform: rotate(45deg) translate(0,0);
+  }
+
+  50% {
+    transform: rotate(45deg) translate(8px,8px);
+  }
+}
+
+/* =========================
+   HEAT SECTION
+========================= */
+
+.heat-section {
+  background:
+    radial-gradient(circle at center, rgba(74,163,255,0.12), transparent 50%),
+    linear-gradient(180deg, #0f1e36, #08111f);
+
+  align-items: center;
+  text-align: center;
+}
+
+.section-kicker {
+  color: rgba(255,255,255,0.8);
+
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+
+  font-weight: 900;
+
+  margin-bottom: 1rem;
+}
+
+.heat-number {
+  font-size: clamp(4rem, 12vw, 10rem);
+
+  font-weight: 900;
+
+  letter-spacing: -0.08em;
+
+  color: white;
+
+  text-shadow:
+    0 0 30px rgba(74,163,255,0.5),
+    0 0 60px rgba(255,76,41,0.15);
+}
+
+.heat-support {
+  margin-top: 1rem;
+
+  max-width: 32ch;
+
+  color: var(--muted);
+
+  font-size: clamp(1rem, 2vw, 1.5rem);
+
+  line-height: 1.5;
+}
+
+/* =========================
+   TRIVIA
+========================= */
+
+.trivia-section {
+  background:
+    linear-gradient(180deg, #08111f, #0f1e36);
+}
+
+.trivia-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 4rem;
+
+  align-items: center;
+}
+
+.trivia-lead h2 {
+  color: white;
+
+  font-family: "Space Grotesk", sans-serif;
+
+  font-size: clamp(2.5rem, 5vw, 5rem);
+
+  line-height: 0.92;
+
+  font-weight: 700;
+
+  letter-spacing: -0.06em;
+}
+
+.trivia-stack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.question-card {
+  position: relative;
+
+  padding: 2rem;
+
+  border-radius: 24px;
+
+  background: rgba(13,22,38,0.8);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(14px);
+
+  box-shadow: var(--shadow);
+
+  overflow: hidden;
+
+  transition:
+    transform .4s ease,
+    box-shadow .4s ease;
+}
+
+.question-card:hover {
+  transform: translateY(-10px);
+
+  box-shadow:
+    0 24px 70px rgba(0,0,0,0.32);
+}
+
+.question-card::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(120deg,
+      rgba(255,255,255,0.08),
+      transparent
+    );
+
+  opacity: 0;
+
+  transition: .4s ease;
+}
+
+.question-card:hover::before {
+  opacity: 1;
+}
+
+.question-card p {
+  color: white;
+
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+
+  line-height: 1.5;
+
+  font-weight: 700;
+}
+
+.card-rule {
+  position: absolute;
+
+  left: 2rem;
+  right: 2rem;
+  bottom: 1rem;
+
+  height: 2px;
+
+  background:
+    linear-gradient(90deg, var(--orange), transparent);
+}
+
+/* =========================
+   PROCESS
+========================= */
+
+.process-section {
+  background:
+    linear-gradient(180deg, #0f1e36, #08111f);
+}
+
+.process-list {
+  width: 100%;
+}
+
+.process-row {
+  position: relative;
+
+  padding: 2rem 0;
+
+  border-top: 1px solid rgba(255,255,255,0.08);
+
+  font-size: clamp(1.4rem, 3vw, 2.5rem);
+
+  font-weight: 900;
+
+  display: flex;
+
+  gap: 1rem;
+
+  color: white;
+
+  overflow: hidden;
+
+  transition: .4s ease;
+}
+
+.process-row:last-child {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.process-row:hover {
+  transform: translateX(20px);
+}
+
+.process-row::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.15),
+      transparent
+    );
+}
+
+.process-row:hover::after {
+  animation: shine 1s ease;
+}
+
+@keyframes shine {
+  to {
+    left: 120%;
+  }
+}
+
+.process-index {
+  color: var(--orange);
+}
+
+/* =========================
+   ROOTS
+========================= */
+
+.roots-section {
+  background:
+    linear-gradient(180deg, #08111f, #0f1e36);
+}
+
+.roots-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 1.5rem;
+}
+
+.roots-card,
+.roots-footer {
+  background: rgba(13,22,38,0.75);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  border-radius: 24px;
+
+  padding: 2.5rem;
+
+  min-height: 220px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  backdrop-filter: blur(18px);
+
+  box-shadow: var(--shadow);
+
+  transition: .4s ease;
+}
+
+.roots-card:hover,
+.roots-footer:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+.roots-card p,
+.roots-footer p {
+  color: white;
+
+  font-size: clamp(1.2rem, 2vw, 2rem);
+
+  font-weight: 700;
+
+  line-height: 1.4;
+}
+
+.roots-footer {
+  grid-column: 1 / -1;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta-section {
+  background:
+    radial-gradient(circle at center, rgba(255,76,41,0.12), transparent 40%),
+    linear-gradient(180deg, #0f1e36, #08111f);
+
+  color: white;
+
+  align-items: center;
+  text-align: center;
+}
+
+.cta-kicker {
+  color: var(--orange);
+
+  font-size: 1rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.3em;
+
+  margin-bottom: 1rem;
+}
+
+.cta-brand-wrap {
+  position: relative;
+
+  padding: 2rem 3rem;
+
+  overflow: hidden;
+}
+
+.brand-outline {
+  position: absolute;
+  inset: 0;
+
+  border: 2px solid rgba(255,76,41,1);
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 0 40px rgba(255,76,41,0.3);
+}
+
+.cta-brand-wrap h2 {
+  font-family: "Space Grotesk", sans-serif;
+
+  font-size: clamp(4rem, 9vw, 8rem);
+
+  line-height: 0.9;
+
+  font-weight: 700;
+
+  letter-spacing: -0.06em;
+
+  color: white;
+
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.15),
+    0 0 20px rgba(255,255,255,0.15),
+    0 0 40px rgba(255,76,41,0.4);
+}
+
+.cta-copy {
+  margin-top: 1.5rem;
+
+  max-width: 18ch;
+
+  color: var(--muted);
+
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+
+  line-height: 1.5;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+  .trivia-grid,
+  .roots-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    color: white;
+  }
+
+  .site-header {
+    width: calc(100% - 1rem);
+  }
+
+  .section-page {
+    padding: 1.5rem;
+  }
+
+  .hero {
+    padding-top: 7rem;
+  }
+}
